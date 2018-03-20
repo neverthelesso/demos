@@ -26,16 +26,24 @@ download.onclick = function(){
   var a = document.createElement('a')
   document.body.appendChild(a)
   a.href = url
-  a.download = '我的画儿'
+  a.download = '我的画'
   a.target = '_blank'
   a.click()
 }
 
-
+black.onclick = function(){
+    context.fillStyle = 'black'
+    context.strokeStyle = 'black'
+    black.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    blue.classList.remove('active')
+  }
 red.onclick = function(){
   context.fillStyle = 'red'
   context.strokeStyle = 'red'
   red.classList.add('active')
+  black.classList.remove('active')
   green.classList.remove('active')
   blue.classList.remove('active')
 }
@@ -43,6 +51,7 @@ green.onclick = function(){
   context.fillStyle = 'green'
   context.strokeStyle = 'green'
   red.classList.remove('active')
+  black.classList.remove('active')
   green.classList.add('active')
   blue.classList.remove('active')
 }
@@ -50,6 +59,7 @@ blue.onclick = function(){
   context.fillStyle = 'blue'
   context.strokeStyle = 'blue'
   red.classList.remove('active')
+  black.classList.remove('active')
   green.classList.remove('active')
   blue.classList.add('active')
 }
@@ -104,7 +114,7 @@ function listenToUser(canvas) {
   }
   // 特性检测
   if(document.body.ontouchstart !== undefined){
-    // 触屏设备 苏菲就是个触屏设备啊哥
+    // 触屏设备
     canvas.ontouchstart = function(aaa){
       var x = aaa.touches[0].clientX
       var y = aaa.touches[0].clientY
@@ -120,7 +130,6 @@ function listenToUser(canvas) {
       }
     }
     canvas.ontouchmove = function(aaa){
-      console.log('边摸边动')
       var x = aaa.touches[0].clientX
       var y = aaa.touches[0].clientY
 
@@ -138,7 +147,6 @@ function listenToUser(canvas) {
       }
     }
     canvas.ontouchend = function(){
-      console.log('摸完了')
       using = false
     }
   }else{
